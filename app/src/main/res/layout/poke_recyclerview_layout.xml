@@ -14,7 +14,7 @@
         android:layout_marginTop="16dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/poke_img"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Bulbasaur" />
 
@@ -33,9 +33,18 @@
         android:id="@+id/poke_type"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/poke_name"
         app:layout_constraintTop_toBottomOf="@+id/poke_name"
         tools:text="grass, poison" />
+
+    <ImageView
+        android:id="@+id/poke_img"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/baseline_image_black_48dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

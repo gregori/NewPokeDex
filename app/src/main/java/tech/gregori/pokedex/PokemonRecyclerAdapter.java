@@ -4,10 +4,14 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.squareup.picasso.OkHttp3Downloader;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -40,6 +44,16 @@ public class PokemonRecyclerAdapter extends RecyclerView.Adapter<PokemonRecycler
         holder.pokemonName.setText(pokemon.getName());
         holder.pokemonNum.setText(pokemon.getNum());
         holder.pokemonType.setText(pokemon.getType().toString());
+
+        Picasso.Builder builder = new Picasso.Builder(context);
+        // Utilizar downloader para http -> https
+        builder.downloader(new OkHttp3Downloader(context))
+                // carregue a url em pokemon.img
+                .build().load(pokemon.getImg())
+                // enquanto não baixou, use um placeholder
+                .placeholder(R.drawable.baseline_image_black_48dp)
+                // insira a imagem no ImageView
+                .into(holder.pokemonImage);
     }
 
     @Override
@@ -55,12 +69,14 @@ public class PokemonRecyclerAdapter extends RecyclerView.Adapter<PokemonRecycler
         TextView pokemonName;
         TextView pokemonNum;
         TextView pokemonType;
+        ImageView pokemonImage;
 
         public PokemonViewHolder(@NonNull View itemView) {
             super(itemView);
             pokemonName = itemView.findViewById(R.id.poke_name);
             pokemonNum = itemView.findViewById(R.id.poke_num);
             pokemonType = itemView.findViewById(R.id.poke_type);
+            pokemonImage = itemView.findViewById(R.id.poke_img);
         }
     }
 }
